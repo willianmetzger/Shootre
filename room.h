@@ -1,5 +1,5 @@
 #pragma once
-#include "tilemap.h"
+#include "enemy.h"
 
 class room
 {
@@ -9,6 +9,7 @@ public:
 
 	void LoadLayout(string file_path);
 	void DrawLayout();
+	tilemap* getTm();
 
 private:
 

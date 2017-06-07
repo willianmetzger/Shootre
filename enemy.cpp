@@ -59,3 +59,8 @@ int enemy::getAngle()
 {
 	return angle;
 }
+
+int enemy::getSpeed()
+{
+	return speed;
+}

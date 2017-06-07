@@ -11,15 +11,18 @@ tilemap::~tilemap()
 }
 
 
-void tilemap::AddTile(int pos, string path, int num_anim, int max_frames)
+void tilemap::AddTile(int pos, string path, int num_anim, int max_frames, bool c)
 {
 	gRecursos.carregarSpriteSheet("tile_" + to_string(pos), path, num_anim, max_frames);
-	tileset[pos].GetSprite()->setSpriteSheet("tile_" + to_string(pos));
+	tileset[pos]->GetSprite()->setSpriteSheet("tile_" + to_string(pos));
+	tileset[pos]->GetSprite()->setAncora(0, 0);
+	tileset[pos]->setCanWalk(c);
 }
 
 void tilemap::LoadLayout(string file_path)
 {
-	int ts_size, tile_na, tile_mf; 
+	int ts_size, tile_na, tile_mf;
+	bool tile_cw;
 	string tile_path;
 	ifstream file_read;
 
@@ -27,29 +30,33 @@ void tilemap::LoadLayout(string file_path)
 		file_read.open(file_path);
 
 	file_read >> ts_size;
-	tileset = new tile[ts_size];
+	tileset = new tile*[ts_size];
+	for (int i = 0; i < ts_size; i++) {
+		tileset[i] = new tile;
+	}
 
 	for (int i = 0; i < ts_size; i++) {
-		file_read >> tile_path;
-		file_read >> tile_na;
-		file_read >> tile_mf;
-		AddTile(i, tile_path, tile_na, tile_mf);
+		file_read >> tile_path;//caminho para a sprite que compõe o tile
+		file_read >> tile_na;//numero de animações da sprite
+		file_read >> tile_mf;//numero máximo de frames da sprite
+		file_read >> tile_cw;//checa se o tile é caminhavel ou não
+		AddTile(i, tile_path, tile_na, tile_mf, tile_cw);
 	}
 	
 	file_read >> tm_l;
 	file_read >> tm_c;
 
-	tilemap_grid = new Sprite**[tm_l];
+	tilemap_grid = new tile**[tm_l];
 
     //file_matrix = new int* [tm_l];
 
     for (int l = 0; l < tm_l; l++) {
-	   tilemap_grid[l] = new Sprite*[tm_c];
+	   tilemap_grid[l] = new tile*[tm_c];
 	   for (int c = 0; c < tm_c; c++) {
 		   char tile_symbol;
 		   file_read >> tile_symbol;
 		   int pos = TranslateToTile(tile_symbol);
-		   tilemap_grid[l][c] = tileset[pos].GetSprite();
+		   tilemap_grid[l][c] = tileset[pos];
 	   }
 	}
 
@@ -76,7 +83,7 @@ void tilemap::DrawLayout()
 
 	for (int l = 0; l < tm_l; l++) {
 		for (int c = 0; c < tm_c; c++) {
-			tilemap_grid[l][c]->desenhar(offset_x, offset_y);
+			tilemap_grid[l][c]->GetSprite()->desenhar(offset_x, offset_y);
 			offset_x += 32;
 		}
 		offset_x = 32;
@@ -136,7 +143,7 @@ void tilemap::SetTileMapSize(int l, int c)
 	this->tm_c = c;
 }
 
-Sprite *** tilemap::GetTilemap()
+tile *** tilemap::GetTilemap()
 {
 	return tilemap_grid;
 }
