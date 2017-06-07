@@ -21,4 +21,3 @@ private:
 	Sprite *spr = new Sprite;
 	bullet *b = new bullet;
 };
-

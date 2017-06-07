@@ -1,0 +1,32 @@
+15
+
+assets/tiles/tile_wall_corner0.png    1 1
+assets/tiles/tile_wall_corner1.png    1 1
+assets/tiles/tile_wall_corner2.png    1 1
+assets/tiles/tile_wall_corner3.png    1 1
+
+assets/tiles/tile_wall_junction0.png    1 1
+assets/tiles/tile_wall_junction1.png    1 1
+assets/tiles/tile_wall_junction2.png    1 1
+assets/tiles/tile_wall_junction3.png    1 1
+
+assets/tiles/tile_wall_end0.png    1 1
+assets/tiles/tile_wall_end1.png    1 1
+assets/tiles/tile_wall_end2.png    1 1
+assets/tiles/tile_wall_end3.png    1 1
+
+assets/tiles/tile_wall_hor.png    1 1
+assets/tiles/tile_wall_vert.png    1 1
+
+assets/tiles/tile_ground_1.png  1 1
+
+8 8
+
+Q - - ^ - - - P
+| 0 0 | 0 0 0 |
+| 0 0 U 0 0 0 |
+< - ] 0 0 [ - >
+| 0 0 0 0 0 0 |
+| 0 0 0 0 ~ 0 |
+| 0 0 0 0 | 0 0
+Z - - - - V - M

@@ -1,7 +1,6 @@
 #include "bullet.h"
 
 
-
 bullet::bullet()
 {
 }
@@ -17,8 +16,8 @@ void bullet::setBullet(int x, int y, int angle, string sprite, float v_s, float 
 	this->y = y;
 	this->angle = angle;
 	this->s->setSpriteSheet(sprite);
-	this->v_speed = v_s*3;
-	this->h_speed = h_s*3;
+	this->v_speed = v_s * 3;
+	this->h_speed = h_s * 3;
 	this->exist = true;
 }
 
